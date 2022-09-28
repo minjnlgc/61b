@@ -100,7 +100,16 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+
+        if(A == null){
+            if (B != null){
+                return new IntList(B.first, catenate(A, B.rest));
+            }else {
+                return null;
+            }
+        }
+
+        return new IntList(A.first, catenate(A.rest, B));
     }
 
 
