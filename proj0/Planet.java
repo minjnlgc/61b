@@ -1,5 +1,5 @@
 public class Planet{
-    
+
     private static final double G = 6.67e-11;
     
     public double xxPos;
@@ -80,4 +80,9 @@ public class Planet{
         this.yyPos += dt * this.yyVel;
 
     }
+
+    public void draw(){
+        StdDraw.picture(this.xxPos, this.yyPos, "images/"+this.imgFileName);
+    }
+
 }
