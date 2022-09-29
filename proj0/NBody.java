@@ -2,7 +2,7 @@ public class NBody {
     
      /** To compile this file: -encoding UTF-8 */
 
-    public static final String backgroundpic = "images/starfield.jpg";
+    private static final String backgroundpic = "images/starfield.jpg";
     
     public static double readRadius(String fileName){
         In in = new In(fileName);
