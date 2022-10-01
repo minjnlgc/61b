@@ -112,19 +112,17 @@ public class IntList {
         return new IntList(A.first, catenate(A.rest, B));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    /**
+     * Returns the reverse of the given IntList.
+     * This method is destructive. If given null
+     * as an input, return null.
+     */
+    public static IntList reverse(IntList A){
+        if (A == null) {
+            return null;
+        }
+        return null;
+    }
 
 
     /**
