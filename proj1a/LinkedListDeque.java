@@ -45,17 +45,11 @@ public class LinkedListDeque<T> {
         sentinel.prev = new Node(sentinel.prev, item, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
         size ++;
-
-        /**
-        Node last = sentinel.prev;
-        sentinel.prev = new Node(last, item, sentinel);
-        size ++;
-         */
     }
 
     /** Returns true is deque is empty, false otherwise. */
     public boolean isEmpty(){
-        return this.equals(sentinel);
+        return size == 0;
     }
 
     /** Return the number of items in the deque. */
