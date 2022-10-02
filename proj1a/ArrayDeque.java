@@ -13,14 +13,14 @@ public class ArrayDeque<T> {
     private void resize() {
         T[] a = (T[]) new Object[items.length * 2];
         int index = 0;
-        for(int i = 0; i < nextLast; i++) {
+        for (int i = 0; i < nextLast; i++) {
             a[index] = items[i];
             index ++;
         }
         int newNextFirst = a.length - items.length + nextFirst;
         int j = nextFirst + 1;
         int i = newNextFirst + 1;
-        while(i < a.length && j < items.length) {
+        while (i < a.length && j < items.length) {
             a[i] = items[j];
             i++;
             j++;
@@ -31,12 +31,12 @@ public class ArrayDeque<T> {
 
     /** Adds an item of type T to the front ot the deque. */
     public void addFirst(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize();
         }
         items[nextFirst] = item;
         size++;
-        nextFirst-=1;
+        nextFirst -= 1;
         if (nextFirst == -1) {
             nextFirst = items.length - 1;
         }
@@ -44,10 +44,10 @@ public class ArrayDeque<T> {
 
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T item) {
-        if(size == items.length) {
+        if (size == items.length) {
             resize();
         }
-        if(nextLast == items.length) {
+        if (nextLast == items.length) {
             nextLast = 0;
         }
         items[nextLast] = item;
@@ -69,12 +69,12 @@ public class ArrayDeque<T> {
     public void printDeque() {
         String result = "";
         int count = 0;
-        for(int i = nextFirst+1; i < items.length; i++) {
+        for (int i = nextFirst + 1; i < items.length; i++) {
             result += items[i].toString() + " ";
             count++;
         }
-        if(count < size) {
-            for(int i = 0; i < nextLast; i++) {
+        if (count < size) {
+            for (int i = 0; i < nextLast; i++) {
                 result += items[i].toString() + " ";
             }
         }
@@ -84,7 +84,7 @@ public class ArrayDeque<T> {
     /** Removes and returns the item at the front of the deque.
      * if no such item exits, return null. */
     public T removeFirst() {
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
         nextFirst += 1;
@@ -95,12 +95,12 @@ public class ArrayDeque<T> {
     /** Removes and returns the item at the back of the deque.
      * if no such item exits, return null. */
     public T removeLast() {
-        if(size == 0){
+        if (size == 0) {
             return null;
         }
         nextLast -= 1;
-        if (nextLast < 0){
-            nextLast = items.length-1;
+        if (nextLast < 0) {
+            nextLast = items.length - 1;
         }
         size--;
         return items[nextLast];
