@@ -99,6 +99,9 @@ public class ArrayDeque<T> {
             return null;
         }
         nextLast -= 1;
+        if (nextLast < 0){
+            nextLast = items.length-1;
+        }
         size--;
         return items[nextLast];
     }
@@ -113,16 +116,6 @@ public class ArrayDeque<T> {
         }
         int mod = (nextFirst + 1 + index) % items.length;
         return items[mod];
-
-        /**
-        int backspan = items.length - nextFirst - 1;
-        int frontspan = nextLast - 1;
-        if (index >= 0 && index < backspan - 1){
-            return items[nextFirst+1+index];
-        } else if (index >= backspan - 1 && index < items.length) {
-            return items[nextLast-index];
-        }
-         **/
     }
 
 }

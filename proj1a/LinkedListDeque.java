@@ -51,7 +51,7 @@ public class LinkedListDeque<T> {
     public void printDeque() {
         String result = "";
         Node p = sentinel.next;
-        for(int i = 0; i < size; i ++){
+        for(int i = 0; i < size; i++){
             result += p.item.toString() + " ";
             p = p.next;
         }

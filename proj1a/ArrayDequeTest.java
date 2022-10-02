@@ -2,14 +2,19 @@ public class ArrayDequeTest {
     public static void main(String[] args) {
         ArrayDeque<Integer> a = new ArrayDeque<Integer>();
         a.addLast(0);
-        a.addLast(1);
-        a.addLast(2);
+        a.addFirst(1);
+        a.get(1);
         a.addLast(3);
-        a.addLast(4);
-        a.addLast(5);
+        a.get(2);
+        a.addFirst(5);
         a.addLast(6);
-        a.addLast(7);
-        a.addFirst(-1);
+        a.removeLast();
+        a.addLast(8);
+        a.addLast(9);
+        a.get(4);
+        a.removeLast();
+        a.removeFirst();
+        System.out.println(a.removeLast());
         // a.isEmpty();
         // System.out.println(a.removeFirst());
         // System.out.println(a.removeLast());
