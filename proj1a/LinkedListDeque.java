@@ -1,7 +1,7 @@
 /** Using Circular Sentinel. */
 
 public class LinkedListDeque<T> {
-    public class Node{
+    private class Node{
 
         public T item;
         public Node prev;
@@ -18,10 +18,11 @@ public class LinkedListDeque<T> {
 
     public LinkedListDeque(){
         sentinel = new Node(null, null, null);
-        sentinel.next = sentinel.prev;
+        sentinel.next = sentinel.prev = sentinel;
         this.size = 0;
     }
 
+    /**
     public LinkedListDeque(T x){
         sentinel = new Node(null, null, null);
         sentinel.next = new Node(null, x, null);
@@ -29,14 +30,13 @@ public class LinkedListDeque<T> {
         sentinel.prev = sentinel.next;
         this.size = 1;
     }
+     */
 
-    /** Add & Remove method:
-     * Must not involve any looping or recursion,
-     * The operation time should take 'constant time'*/
 
     /** Adds an item of type T to the front of the deque. */
     public void addFirst(T item){
         sentinel.next = new Node(sentinel, item, sentinel.next);
+        sentinel.next.next.prev = sentinel.next;
         size ++;
     }
 
@@ -45,6 +45,12 @@ public class LinkedListDeque<T> {
         sentinel.prev = new Node(sentinel.prev, item, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
         size ++;
+
+        /**
+        Node last = sentinel.prev;
+        sentinel.prev = new Node(last, item, sentinel);
+        size ++;
+         */
     }
 
     /** Returns true is deque is empty, false otherwise. */

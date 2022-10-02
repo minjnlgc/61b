@@ -84,24 +84,17 @@ public class LinkedListDequeTest {
 		*/
 	}
 
-	public static void constructorTest(){
-		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-		LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>(2);
-		boolean passed1 = checkEmpty(false, lld2.isEmpty());
-		boolean passed2 = checkEmpty(true, lld1.isEmpty());
-		printTestStatus(passed1);
-		printTestStatus(passed2);
-	}
 
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
-		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>(2);
-		lld1.addLast(3);
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		lld1.addFirst(1);
-		lld1.addLast(4);
+		lld1.addFirst(0);
+
+		// lld1.addLast(2);
+		// lld1.addLast(3);
 		lld1.printDeque();
-		System.out.println(lld1.get(0));
-		System.out.println(lld1.get(0));
+
 
 
 		//constructorTest();
