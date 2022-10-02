@@ -43,6 +43,7 @@ public class LinkedListDeque<T> {
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T item){
         sentinel.prev = new Node(sentinel.prev, item, sentinel);
+        sentinel.prev.prev.next = sentinel.prev;
         size ++;
     }
 
@@ -60,21 +61,43 @@ public class LinkedListDeque<T> {
      * Separated by a space.
      */
     public void printDeque(){
-
+        String result = "";
+        Node p = sentinel.next;
+        for(int i = 0; i < size; i ++){
+            result += p.item.toString() + " ";
+            p = p.next;
+        }
+        System.out.println(result);
     }
 
     /** Removes and return the items at the front of the deque.
      * If no such item, return null.
      */
     public T removeFirst(){
-        return null;
+        if (this.isEmpty()){
+            return null;
+        }else{
+            T p = sentinel.next.item;
+            sentinel.next = sentinel.next.next;
+            sentinel.next.prev = sentinel;
+            size -= 1;
+            return p;
+        }
     }
 
     /** Removes and returns the items at the back of the deque.
      * If no such item, return null.
      */
     public T removeLast(){
-        return null;
+        if (this.isEmpty()){
+            return null;
+        }else{
+            T p = sentinel.prev.item;
+            sentinel.prev = sentinel.prev.prev;
+            sentinel.prev.next = sentinel;
+            size -= 1;
+            return p;
+        }
     }
 
     /** Gets the items at the given index, where 0 is the front.
@@ -85,8 +108,25 @@ public class LinkedListDeque<T> {
     public T get(int index){
         if (index > size-1){
             return null;
+        }else{
+            Node p = sentinel;
+            for(int i = 0; i <= index; i++){
+                p = p.next;
+            }
+            return p.item;
+        }
+    }
+
+    /** Same as get, but uses recursion. */
+    public T getRecursive(int index){
+        Node p = sentinel;
+        if(index == 0){
+            return p.next.item;
+        }
+        while(index > 0){
+            p = p.next;
+            getRecursive(index-1);
         }
         return null;
     }
-
 }
