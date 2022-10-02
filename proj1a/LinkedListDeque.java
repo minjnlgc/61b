@@ -1,6 +1,6 @@
 /** Using Circular Sentinel. */
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<T>{
     private class Node{
 
         public T item;
@@ -15,36 +15,24 @@ public class LinkedListDeque<T> {
     }
     private Node sentinel;
     private int size;
-
     public LinkedListDeque(){
         sentinel = new Node(null, null, null);
         sentinel.next = sentinel.prev = sentinel;
         this.size = 0;
     }
 
-    /**
-    public LinkedListDeque(T x){
-        sentinel = new Node(null, null, null);
-        sentinel.next = new Node(null, x, null);
-        sentinel.next.next = sentinel.next;
-        sentinel.prev = sentinel.next;
-        this.size = 1;
-    }
-     */
-
-
     /** Adds an item of type T to the front of the deque. */
     public void addFirst(T item){
         sentinel.next = new Node(sentinel, item, sentinel.next);
         sentinel.next.next.prev = sentinel.next;
-        size ++;
+        size++;
     }
 
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T item){
         sentinel.prev = new Node(sentinel.prev, item, sentinel);
         sentinel.prev.prev.next = sentinel.prev;
-        size ++;
+        size++;
     }
 
     /** Returns true is deque is empty, false otherwise. */

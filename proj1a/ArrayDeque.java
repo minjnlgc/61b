@@ -1,17 +1,15 @@
 public class ArrayDeque<T> {
-    private static final int initialSize = 8;
+    private static final int INITIAL_SIZE = 8;
     private T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
-
     public ArrayDeque(){
-        items = (T[]) new Object[initialSize];
+        items = (T[]) new Object[INITIAL_SIZE];
         size = 0;
         nextFirst = 4;
         nextLast = 5;
     }
-
     private void resize(){
         T[] a = (T[]) new Object[items.length * 2];
         int index = 0;
@@ -34,8 +32,11 @@ public class ArrayDeque<T> {
             resize();
         }
         items[nextFirst] = item;
-        size ++;
+        size++;
         nextFirst-=1;
+        if (nextFirst == -1){
+            nextFirst = items.length - 1;
+        }
     }
 
     /** Adds an item of type T to the back of the deque. */
@@ -44,7 +45,7 @@ public class ArrayDeque<T> {
             resize();
         }
         items[nextLast] = item;
-        size ++;
+        size++;
         if(nextLast == items.length-1){
             nextLast = 0;
         }
@@ -84,7 +85,7 @@ public class ArrayDeque<T> {
             return null;
         }
         nextFirst += 1;
-        size --;
+        size--;
         return items[nextFirst];
     }
 
@@ -95,7 +96,7 @@ public class ArrayDeque<T> {
             return null;
         }
         nextLast -= 1;
-        size --;
+        size--;
         return items[nextLast];
     }
 
