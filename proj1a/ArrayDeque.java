@@ -80,6 +80,9 @@ public class ArrayDeque<T> {
     /** Removes and returns the item at the front of the deque.
      * if no such item exits, return null. */
     public T removeFirst(){
+        if(size == 0){
+            return null;
+        }
         nextFirst += 1;
         size --;
         return items[nextFirst];
@@ -88,6 +91,9 @@ public class ArrayDeque<T> {
     /** Removes and returns the item at the back of the deque.
      * if no such item exits, return null. */
     public T removeLast(){
+        if(size == 0){
+            return null;
+        }
         nextLast -= 1;
         size --;
         return items[nextLast];

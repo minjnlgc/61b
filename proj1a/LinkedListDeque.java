@@ -119,6 +119,9 @@ public class LinkedListDeque<T> {
 
     /** Same as get, but uses recursion. */
     public T getRecursive(int index){
+        if(index >= size){
+            return null;
+        }
         Node p = sentinel;
         if(index == 0){
             return p.next.item;
