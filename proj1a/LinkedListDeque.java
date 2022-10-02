@@ -122,14 +122,13 @@ public class LinkedListDeque<T> {
         if(index >= size){
             return null;
         }
-        Node p = sentinel;
+        return getRecursiveHelper(sentinel.next, index);
+    }
+
+    private T getRecursiveHelper(LinkedListDeque<T>.Node node, int index){
         if(index == 0){
-            return p.next.item;
+            return node.item;
         }
-        while(index > 0){
-            p = p.next;
-            getRecursive(index-1);
-        }
-        return null;
+        return getRecursiveHelper(node, index-1);
     }
 }
