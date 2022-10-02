@@ -1,3 +1,4 @@
+/** Using Circular Sentinel. */
 
 public class LinkedListDeque<T> {
     public class Node{
@@ -17,32 +18,37 @@ public class LinkedListDeque<T> {
 
     public LinkedListDeque(){
         sentinel = new Node(null, null, null);
+        sentinel.next = sentinel.prev;
         this.size = 0;
     }
 
     public LinkedListDeque(T x){
-        sentinel = new Node(null, x, null);
-        sentinel.next = new Node(null, null, null);
+        sentinel = new Node(null, null, null);
+        sentinel.next = new Node(null, x, null);
+        sentinel.next.next = sentinel.next;
         sentinel.prev = sentinel.next;
         this.size = 1;
     }
 
-    /** Add method:
+    /** Add & Remove method:
      * Must not involve any looping or recursion,
      * The operation time should take 'constant time'*/
 
     /** Adds an item of type T to the front of the deque. */
     public void addFirst(T item){
+        sentinel.next = new Node(sentinel, item, sentinel.next);
+        size ++;
     }
 
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T item){
-
+        sentinel.prev = new Node(sentinel.prev, item, sentinel);
+        size ++;
     }
 
     /** Returns true is deque is empty, false otherwise. */
     public boolean isEmpty(){
-        return true;
+        return this.equals(sentinel);
     }
 
     /** Return the number of items in the deque. */
@@ -71,12 +77,16 @@ public class LinkedListDeque<T> {
         return null;
     }
 
-    /** Gets the items at the given index, where 0 is the front,
-     * 1 is the next item, and so forth.
+    /** Gets the items at the given index, where 0 is the front.
      * If no such item, return null.
      * Must not alter the deque!.
+     * Use iteration, not recursion.
      */
     public T get(int index){
+        if (index > size-1){
+            return null;
+        }
         return null;
     }
+
 }

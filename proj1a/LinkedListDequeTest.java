@@ -84,9 +84,19 @@ public class LinkedListDequeTest {
 		*/
 	}
 
+	public static void constructorTest(){
+		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
+		LinkedListDeque<Integer> lld2 = new LinkedListDeque<Integer>(2);
+		boolean passed1 = checkEmpty(false, lld2.isEmpty());
+		boolean passed2 = checkEmpty(true, lld1.isEmpty());
+		printTestStatus(passed1);
+		printTestStatus(passed2);
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
-		addIsEmptySizeTest();
-		addRemoveTest();
+		constructorTest();
+		//addIsEmptySizeTest();
+		//addRemoveTest();
 	}
 } 
