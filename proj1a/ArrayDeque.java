@@ -4,74 +4,77 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
-    public ArrayDeque(){
+    public ArrayDeque() {
         items = (T[]) new Object[INITIAL_SIZE];
         size = 0;
         nextFirst = 4;
         nextLast = 5;
     }
-    private void resize(){
+    private void resize() {
         T[] a = (T[]) new Object[items.length * 2];
         int index = 0;
-        for(int i = 0; i < nextLast; i++){
+        for(int i = 0; i < nextLast; i++) {
             a[index] = items[i];
             index ++;
         }
         int newNextFirst = a.length - items.length + nextFirst;
-        for(int i = newNextFirst+1; i < items.length; i++){
-            a[i] = items[nextFirst+1];
-            nextFirst+=1;
+        int j = nextFirst + 1;
+        int i = newNextFirst + 1;
+        while(i < a.length && j < items.length) {
+            a[i] = items[j];
+            i++;
+            j++;
         }
         nextFirst = newNextFirst;
         items = a;
     }
 
     /** Adds an item of type T to the front ot the deque. */
-    public void addFirst(T item){
-        if(size == items.length){
+    public void addFirst(T item) {
+        if(size == items.length) {
             resize();
         }
         items[nextFirst] = item;
         size++;
         nextFirst-=1;
-        if (nextFirst == -1){
+        if (nextFirst == -1) {
             nextFirst = items.length - 1;
         }
     }
 
     /** Adds an item of type T to the back of the deque. */
-    public void addLast(T item){
-        if(size == items.length){
+    public void addLast(T item) {
+        if(size == items.length) {
             resize();
+        }
+        if(nextLast == items.length) {
+            nextLast = 0;
         }
         items[nextLast] = item;
         size++;
-        if(nextLast == items.length-1){
-            nextLast = 0;
-        }
         nextLast++;
     }
 
     /** Returns true if deque is empty, false otherwise. */
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return size == 0;
     }
 
     /** Returns the number of items in the deque. */
-    public int size(){
+    public int size() {
         return size;
     }
 
     /** Prints the items in the deque from first to last, separated by a space. */
-    public void printDeque(){
+    public void printDeque() {
         String result = "";
         int count = 0;
-        for(int i = nextFirst+1; i < items.length; i++){
+        for(int i = nextFirst+1; i < items.length; i++) {
             result += items[i].toString() + " ";
             count++;
         }
-        if(count < size){
-            for(int i = 0; i < nextLast; i++){
+        if(count < size) {
+            for(int i = 0; i < nextLast; i++) {
                 result += items[i].toString() + " ";
             }
         }
@@ -80,7 +83,7 @@ public class ArrayDeque<T> {
 
     /** Removes and returns the item at the front of the deque.
      * if no such item exits, return null. */
-    public T removeFirst(){
+    public T removeFirst() {
         if(size == 0){
             return null;
         }
@@ -91,7 +94,7 @@ public class ArrayDeque<T> {
 
     /** Removes and returns the item at the back of the deque.
      * if no such item exits, return null. */
-    public T removeLast(){
+    public T removeLast() {
         if(size == 0){
             return null;
         }
@@ -103,7 +106,23 @@ public class ArrayDeque<T> {
     /** Gets the item at the given index, where 0 is the front, 1 is the next item,
      * and so forth. If no such item exists, returns null.
      * Must not alter the deque! */
-    public T get(int index){
-        return null;
+    public T get(int index) {
+
+        if (index >= size) {
+            return null;
+        }
+        int mod = (nextFirst + 1 + index) % items.length;
+        return items[mod];
+
+        /**
+        int backspan = items.length - nextFirst - 1;
+        int frontspan = nextLast - 1;
+        if (index >= 0 && index < backspan - 1){
+            return items[nextFirst+1+index];
+        } else if (index >= backspan - 1 && index < items.length) {
+            return items[nextLast-index];
+        }
+         **/
     }
+
 }
