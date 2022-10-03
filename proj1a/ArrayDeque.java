@@ -27,23 +27,21 @@ public class ArrayDeque<T> {
         }
 
         if (resizeOrNot) {
-            if (items[0] == null && items[items.length - 1] == null) {
-                System.arraycopy(items, nextFirst + 1, a, 0, size);
-            } else {
-                System.arraycopy(items, nextFirst + 1, a, 0, items.length - nextFirst - 1);
-                int len = 0;
-                for (int i = 0; i < a.length; i++) {
-                    if (a[i] == null) {
-                        break;
-                    }
-                    len++;
-                }
-                System.arraycopy(items, 0, a, len, nextLast);
+            int index = 0;
+            for (int i = 0; i < nextLast; i++) {
+                a[index] = items[i];
+                index ++;
             }
+            int newNextFirst = a.length - items.length + nextFirst;
+            int j = nextFirst + 1;
+            int i = newNextFirst + 1;
+            while (i < a.length && j < items.length) {
+                a[i] = items[j];
+                i++;
+                j++;
+            }
+            nextFirst = newNextFirst;
             items = a;
-
-            nextFirst = a.length - 1;
-            nextLast = size;
         }
     }
 
