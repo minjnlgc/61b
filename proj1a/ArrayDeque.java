@@ -10,6 +10,42 @@ public class ArrayDeque<T> {
         nextFirst = 4;
         nextLast = 5;
     }
+
+    private double getUsageRatio(int size, int item_length) {
+        return (double) size / (double) item_length;
+    }
+
+    private void resize() {
+        boolean resizeOrNot = false;
+        T[] a = (T[]) new Object[items.length * 2];
+
+        if (getUsageRatio(size, items.length) >= 0.75) {
+            resizeOrNot = true;
+        } else if (getUsageRatio(size, items.length) < 0.25 && items.length >= 16) {
+            resizeOrNot = true;
+            a = (T[]) new Object[items.length / 2];
+        }
+
+        if (resizeOrNot) {
+            int index = 0;
+            for (int i = 0; i < nextLast; i++) {
+                a[index] = items[i];
+                index ++;
+            }
+            int newNextFirst = a.length - items.length + nextFirst;
+            int j = nextFirst + 1;
+            int i = newNextFirst + 1;
+            while (i < a.length && j < items.length) {
+                a[i] = items[j];
+                i++;
+                j++;
+            }
+            nextFirst = newNextFirst;
+            items = a;
+        }
+    }
+
+    /** old resize()
     private void resize() {
         T[] a = (T[]) new Object[items.length * 2];
         int index = 0;
@@ -28,31 +64,34 @@ public class ArrayDeque<T> {
         nextFirst = newNextFirst;
         items = a;
     }
+    */
 
     /** Adds an item of type T to the front ot the deque. */
     public void addFirst(T item) {
-        if (size == items.length) {
+       /* if (size == items.length) {
             resize();
-        }
+        }*/
         items[nextFirst] = item;
         size++;
         nextFirst -= 1;
         if (nextFirst == -1) {
             nextFirst = items.length - 1;
         }
+        resize();
     }
 
     /** Adds an item of type T to the back of the deque. */
     public void addLast(T item) {
-        if (size == items.length) {
+        /*if (size == items.length) {
             resize();
-        }
+        }*/
         if (nextLast == items.length) {
             nextLast = 0;
         }
         items[nextLast] = item;
         size++;
         nextLast++;
+        resize();
     }
 
     /** Returns true if deque is empty, false otherwise. */
@@ -89,6 +128,7 @@ public class ArrayDeque<T> {
         }
         nextFirst += 1;
         size--;
+        resize();
         return items[nextFirst];
     }
 
@@ -103,6 +143,7 @@ public class ArrayDeque<T> {
             nextLast = items.length - 1;
         }
         size--;
+        resize();
         return items[nextLast];
     }
 
