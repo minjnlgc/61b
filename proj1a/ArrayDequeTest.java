@@ -15,11 +15,7 @@ public class ArrayDequeTest {
         a.removeLast();
         a.removeFirst();
         System.out.println(a.removeLast());
-        // a.isEmpty();
-        // System.out.println(a.removeFirst());
-        // System.out.println(a.removeLast());
         a.printDeque();
         System.out.println(a.get(2));
-
     }
 }

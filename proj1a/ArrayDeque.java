@@ -30,7 +30,7 @@ public class ArrayDeque<T> {
             int index = 0;
             for (int i = 0; i < nextLast; i++) {
                 a[index] = items[i];
-                index ++;
+                index++;
             }
             int newNextFirst = a.length - items.length + nextFirst;
             int j = nextFirst + 1;

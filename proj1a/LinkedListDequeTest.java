@@ -90,15 +90,5 @@ public class LinkedListDequeTest {
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
 		lld1.addFirst(1);
 		lld1.addFirst(0);
-
-		// lld1.addLast(2);
-		// lld1.addLast(3);
-		lld1.printDeque();
-
-
-
-		//constructorTest();
-		//addIsEmptySizeTest();
-		//addRemoveTest();
 	}
 } 

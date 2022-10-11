@@ -3,9 +3,9 @@
 public class LinkedListDeque<T> {
     private class Node {
 
-        public T item;
-        public Node prev;
-        public Node next;
+        private T item;
+        private Node prev;
+        private Node next;
 
         public Node(Node p, T i, Node n) {
             prev = p;
@@ -51,7 +51,7 @@ public class LinkedListDeque<T> {
     public void printDeque() {
         String result = "";
         Node p = sentinel.next;
-        for(int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             result += p.item.toString() + " ";
             p = p.next;
         }
@@ -64,7 +64,7 @@ public class LinkedListDeque<T> {
     public T removeFirst() {
         if (this.isEmpty()) {
             return null;
-        }else{
+        } else {
             T p = sentinel.next.item;
             sentinel.next = sentinel.next.next;
             sentinel.next.prev = sentinel;
@@ -79,7 +79,7 @@ public class LinkedListDeque<T> {
     public T removeLast() {
         if (this.isEmpty()) {
             return null;
-        }else{
+        } else {
             T p = sentinel.prev.item;
             sentinel.prev = sentinel.prev.prev;
             sentinel.prev.next = sentinel;
@@ -94,11 +94,11 @@ public class LinkedListDeque<T> {
      * Use iteration, not recursion.
      */
     public T get(int index) {
-        if (index > size-1) {
+        if (index > size - 1) {
             return null;
-        }else{
+        } else {
             Node p = sentinel;
-            for(int i = 0; i <= index; i++) {
+            for (int i = 0; i <= index; i++) {
                 p = p.next;
             }
             return p.item;
@@ -107,16 +107,16 @@ public class LinkedListDeque<T> {
 
     /** Same as get, but uses recursion. */
     public T getRecursive(int index) {
-        if(index > size) {
+        if (index > size) {
             return null;
         }
         return getRecursiveHelper(sentinel.next, index);
     }
 
     private T getRecursiveHelper(LinkedListDeque<T>.Node node, int index) {
-        if(index == 0) {
+        if (index == 0) {
             return node.item;
         }
-        return getRecursiveHelper(node, index-1);
+        return getRecursiveHelper(node, index - 1);
     }
 }
