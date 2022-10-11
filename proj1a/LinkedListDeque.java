@@ -117,6 +117,6 @@ public class LinkedListDeque<T> {
         if (index == 0) {
             return node.item;
         }
-        return getRecursiveHelper(node, index - 1);
+        return getRecursiveHelper(node.next, index - 1);
     }
 }
