@@ -21,7 +21,7 @@ public class ArrayDeque<T> {
 
         if (getUsageRatio(size, items.length) >= 0.75) {
             resizeOrNot = true;
-        } else if (getUsageRatio(size, items.length) < 0.25 && items.length >= 8) {
+        } else if (getUsageRatio(size, items.length) < 0.25 && items.length > 8) {
             resizeOrNot = true;
             a = (T[]) new Object[items.length / 2];
         }
