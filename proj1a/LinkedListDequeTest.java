@@ -87,18 +87,6 @@ public class LinkedListDequeTest {
 	public static void main(String[] args) {
 		System.out.println("Running tests.\n");
 		LinkedListDeque<Integer> lld1 = new LinkedListDeque<Integer>();
-		lld1.addFirst(3);
-		lld1.addLast(4);
-		lld1.removeLast();
-		lld1.removeLast();
-		lld1.addFirst(3);
-		lld1.addLast(4);
-		lld1.removeLast();
-		lld1.removeLast();
-		lld1.addFirst(7);
-		lld1.removeLast();
-		lld1.addLast(10);
-		lld1.removeFirst();
 		lld1.addFirst(12);
 		lld1.addLast(13);
 		System.out.println((lld1.getRecursive(1)));
