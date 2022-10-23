@@ -18,7 +18,7 @@ public class ArrayDeque<T> {
     private void resize() {
         if (getUsageRatio(size, items.length) >= 0.75) {
             expand();
-        } else if (getUsageRatio(size, items.length) < 0.25 && items.length > 8) {
+        } else if (getUsageRatio(size, items.length) < 0.25 && items.length >= 16) {
             shrink();
         }
     }
