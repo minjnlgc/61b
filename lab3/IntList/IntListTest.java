@@ -72,11 +72,16 @@ public class IntListTest {
 
     @Test
     public void testReverse() {
-        IntList A = IntList.of(1, 2, 3);
-        IntList B = IntList.of(4, 5, 6);
-        IntList exp1 = IntList.of(3, 2, 1);
-        IntList exp2 = IntList.of(6, 5, 4);
-        assertEquals(exp1, IntList.reverse(A));
-        assertEquals(exp2, IntList.reverse(B));
+
+        /** The function return a reversed list. **/
+        IntList A = IntList.of(1, 2, 3, 4);
+        assertEquals(IntList.of(4, 3, 2, 1), IntList.reverse(A));
+
+        /** The function is destructive. **/
+        assertNotEquals(IntList.of(4, 3, 2, 1), IntList.reverse(A));
+
+        /** The method handles a null input properly. **/
+        assertNull(IntList.reverse(null));
+
     }
 }
