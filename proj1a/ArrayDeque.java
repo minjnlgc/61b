@@ -16,6 +16,39 @@ public class ArrayDeque<T> {
     }
 
     private void resize() {
+        if (getUsageRatio(size, items.length) >= 0.75) {
+            expand();
+        } else if (getUsageRatio(size, items.length) < 0.25 && items.length > 8) {
+            shrink();
+        }
+    }
+
+    private void shrink() {
+        T[] newArray = (T[]) new Object[items.length / 2];
+
+        int back = items.length - nextFirst - 1;
+        // copy from the front
+        System.arraycopy(items, 0, newArray, 0, nextLast);
+        // copy from the back
+        System.arraycopy(items, nextFirst + 1, newArray, newArray.length - back, back);
+
+        nextFirst = newArray.length - back - 1;
+    }
+
+    private void expand() {
+        T[] newArray = (T[]) new Object[items.length * 2];
+        int back = items.length - nextLast;
+        // copy from back
+        System.arraycopy(items, nextLast, newArray, newArray.length - back, back);
+        // copy from front
+        System.arraycopy(items, 0, newArray, 0, nextFirst + 1);
+
+        nextFirst = newArray.length - back - 1;
+    }
+
+    /*
+    private void resize() {
+
         boolean resizeOrNot = false;
         T[] a = (T[]) new Object[items.length * 2];
 
@@ -25,6 +58,11 @@ public class ArrayDeque<T> {
             resizeOrNot = true;
             a = (T[]) new Object[items.length / 2];
         }
+
+        if (resizeOrNot) {
+
+        }
+
 
         if (resizeOrNot) {
             int index = 0;
@@ -44,6 +82,7 @@ public class ArrayDeque<T> {
             items = a;
         }
     }
+     */
 
 
     /** Adds an item of type T to the front ot the deque. */
