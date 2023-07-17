@@ -44,7 +44,16 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      *  or null if this map contains no mapping for the key.
      */
     private V getHelper(K key, Node p) {
-        throw new UnsupportedOperationException();
+        if (p == null) return null;
+
+        int cmp = p.key.compareTo(key);
+        if (cmp == 0) return p.value;
+        else if (cmp < 0) {
+            return getHelper(key, p.left);
+        } else if (cmp > 0){
+            return getHelper(key, p.right);
+        }
+        return null;
     }
 
     /** Returns the value to which the specified key is mapped, or null if this
@@ -52,29 +61,58 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        return getHelper(key, this.root);
     }
 
     /** Returns a BSTMap rooted in p with (KEY, VALUE) added as a key-value mapping.
       * Or if p is null, it returns a one node BSTMap containing (KEY, VALUE).
      */
-    private Node putHelper(K key, V value, Node p) {
-        throw new UnsupportedOperationException();
-    }
 
     /** Inserts the key KEY
      *  If it is already present, updates value to be VALUE.
      */
     @Override
     public void put(K key, V value) {
-        throw new UnsupportedOperationException();
+       Node p = root;
+       Node prev = null;
+
+       if (root == null) {
+           root = new Node(key, value);
+           size++;
+           return;
+       }
+
+       while (p != null) {
+           int cmp = key.compareTo(p.key);
+           if (cmp == 0) {
+               p.value = value;
+               size++;
+               return;
+           } else if (cmp > 0) {
+               prev = p;
+               p = p.right;
+           } else if (cmp < 0) {
+               prev = p;
+               p = p.left;
+           }
+       }
+
+       int cmp = prev.key.compareTo(key);
+       if (cmp < 0) {
+           prev.left = new Node(key, value);
+           size++;
+       } else if (cmp > 0) {
+           prev.right = new Node(key, value);
+           size++;
+       }
     }
 
     /* Returns the number of key-value mappings in this map. */
     @Override
     public int size() {
-        throw new UnsupportedOperationException();
+        return this.size;
     }
+
 
     //////////////// EVERYTHING BELOW THIS LINE IS OPTIONAL ////////////////
 

@@ -84,7 +84,12 @@ public class TestBSTMap {
         b.put("hi", 1);
         assertTrue(b.containsKey("hi"));
         assertTrue(b.get("hi") != null);
+
+        b.put("ibuprofen", 11);
+        assertTrue(b.containsKey("ibuprofen"));
+        assertTrue(b.get("ibuprofen") != null);
     }
+
 
     public static void main(String[] args) {
         jh61b.junit.TestRunner.runTests(TestBSTMap.class);
