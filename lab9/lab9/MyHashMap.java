@@ -7,7 +7,7 @@ import java.util.Set;
  *  A hash table-backed Map implementation. Provides amortized constant time
  *  access to elements via get(), remove(), and put() in the best case.
  *
- *  @author Your name here
+ *  @author minjnlgc
  */
 public class MyHashMap<K, V> implements Map61B<K, V> {
 
@@ -53,7 +53,8 @@ public class MyHashMap<K, V> implements Map61B<K, V> {
      */
     @Override
     public V get(K key) {
-        throw new UnsupportedOperationException();
+        int hashValue = hash(key);
+        return this.buckets[hashValue].get(key);
     }
 
     /* Associates the specified value with the specified key in this map. */
